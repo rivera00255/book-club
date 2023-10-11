@@ -1,0 +1,29 @@
+.container {
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px 80px;
+  // width: 80%;
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  > div {
+    > span {
+      display: flex;
+    }
+  }
+  > div:first-of-type {
+    width: 48px;
+    height: 60px;
+    margin-right: 20px;
+    position: relative;
+    > img {
+      object-fit: contain;
+      position: relative;
+      height: auto;
+    }
+  }
+  strong {
+    font-size: 15px;
+  }
+}

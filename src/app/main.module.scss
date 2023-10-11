@@ -1,0 +1,49 @@
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  > div {
+    width: 22%;
+    height: 300px;
+    border: 1px solid #f3f4f6;
+    padding: 10px 16px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #525252;
+    > div {
+      width: 100%;
+      text-align: left;
+      font-size: 22px;
+      font-weight: 100;
+    }
+    > span {
+      width: 90px;
+      height: 140px;
+      margin-bottom: 10px;
+      position: relative;
+      > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+      }
+    }
+    > p {
+      font-size: 14px;
+      font-weight: 200;
+      > strong {
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+    > p:last-of-type {
+      font-size: 13px;
+    }
+  }
+}
