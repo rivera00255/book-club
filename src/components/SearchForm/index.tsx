@@ -13,7 +13,6 @@ const SearchForm = () => {
   const [books, setBooks] = useState<{ [key: string]: Books }[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  // console.log(books);
 
   const searchBooks = async (type: string, search: string, pageNo: number) => {
     const response = await queryFetch(
@@ -29,11 +28,15 @@ const SearchForm = () => {
     setTotalCount(0);
     setCurrentPage(1);
     if (searchRef.current && searchRef.current.value !== "") {
-      const searchStr = searchRef.current.value;
+      const searchStr = searchRef.current.value.trim().replaceAll(" ", "");
       setSearch(searchStr);
       const result = await searchBooks(searchType, searchStr, currentPage);
       setTotalCount(result.numFound);
     }
+  };
+
+  const handleEnterKey = (e: KeyboardEvent) => {
+    if (e.code === "Enter") onSearch();
   };
 
   useEffect(() => {
@@ -48,10 +51,17 @@ const SearchForm = () => {
           <option value="title">도서명</option>
           <option value="author">저자명</option>
         </select>
-        <input type="text" ref={searchRef} />
+        <input
+          type="text"
+          ref={searchRef}
+          onKeyUp={(e: any) => handleEnterKey(e)}
+        />
         <button onClick={onSearch}>검색</button>
       </div>
       <div>
+        {/* {search !== "" && books.length < 1 && (
+          <span>검색 결과가 없습니다.</span>
+        )} */}
         {books.length > 0 &&
           books.map((item: { [key: string]: Books }) => (
             <BookPreview item={item.doc} key={item.doc.isbn13} />

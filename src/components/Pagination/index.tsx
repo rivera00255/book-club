@@ -3,21 +3,17 @@ import usePagination from "../../hooks/usePagination";
 import { Dispatch, SetStateAction } from "react";
 
 const Pagination = ({
-  // limit,
   pageLimit,
   totalPage,
   currentPage,
   setCurrentPage,
 }: {
-  // limit: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
   pageLimit: number;
   totalPage: number;
 }) => {
   const {
-    // currentPage,
-    // setCurrentPage,
     currentPageBlock,
     setCurrentPageBlock,
     pageable,
@@ -27,21 +23,11 @@ const Pagination = ({
     moveToFirst,
     moveToLast,
   } = usePagination({
-    // limit,
     pageLimit,
     totalPage,
     currentPage,
     setCurrentPage,
   });
-
-  // useEffect(() => {
-  //   if (persist.getSessionStorage('page')) {
-  //     const saved = persist.getSessionStorage('page');
-  //     setCurrentPage(saved.currentPage);
-  //     setCurrentPageBlock(saved.currentPageBlock);
-  //     setFirstCount(saved.firstCount);
-  //   }
-  // }, []);
 
   return (
     <div className={styles.page}>
@@ -66,14 +52,20 @@ const Pagination = ({
         ))}
       <button
         onClick={next}
-        disabled={currentPage === totalPage || totalPage <= 1}
+        disabled={
+          currentPage === totalPage ||
+          totalPage <= 1 ||
+          (currentPageBlock + 1) * pageLimit >= totalPage
+        }
       >
         &gt;
       </button>
       <button
         onClick={moveToLast}
         disabled={
-          currentPage === totalPage || Math.ceil(totalPage / pageLimit) <= 1
+          currentPage === totalPage ||
+          Math.ceil(totalPage / pageLimit) <= 1 ||
+          (currentPageBlock + 1) * pageLimit >= totalPage
         }
       >
         &gt;&gt;

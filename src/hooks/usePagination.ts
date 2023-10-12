@@ -11,7 +11,6 @@ const usePagination = ({
   pageLimit: number;
   totalPage: number;
 }) => {
-  // const [currentPage, setCurrentPage] = useState(1);
   const [currentPageBlock, setCurrentPageBlock] = useState(0);
 
   const pageOffset = currentPageBlock * pageLimit;
@@ -32,17 +31,15 @@ const usePagination = ({
   };
 
   const prev = () => {
-    if (currentPage <= 1) return;
-    if (currentPage - 1 <= pageLimit * currentPageBlock)
-      setCurrentPageBlock((prev) => prev - 1);
-    setCurrentPage((page) => page - 1);
+    if (currentPageBlock < 1 || currentPageBlock === 0) return;
+    setCurrentPage((currentPageBlock - 1) * pageLimit + 1);
+    setCurrentPageBlock((prev) => prev - 1);
   };
 
   const next = () => {
-    if (currentPage >= totalPage) return;
-    if (pageLimit * (currentPageBlock + 1) < currentPage + 1)
-      setCurrentPageBlock((prev) => prev + 1);
-    setCurrentPage((page) => page + 1);
+    if ((currentPageBlock + 1) * pageLimit >= totalPage) return;
+    setCurrentPage((currentPageBlock + 1) * pageLimit + 1);
+    setCurrentPageBlock((prev) => prev + 1);
   };
 
   const moveToFirst = () => {

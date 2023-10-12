@@ -1,0 +1,37 @@
+.modal {
+  width: 80vw;
+  height: 80vh;
+  border-radius: 5px;
+  background: #fafafa;
+  box-shadow: 3px 3px 5px #e5e5e5;
+  padding: 40px 32px;
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h4 {
+      font-size: 15px;
+    }
+    > select {
+      margin: 0 10px;
+      padding: 5px 32px;
+    }
+    > button {
+      background: #e5e5e5;
+      padding: 4px 20px;
+      border-radius: 5px;
+    }
+  }
+  table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 0;
+    width: 100%;
+    font-size: 13px;
+    color: #737373;
+  }
+  td {
+    border: 1px solid #d4d4d4;
+    padding: 4px 0 4px 8px;
+  }
+}

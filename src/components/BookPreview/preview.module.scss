@@ -3,27 +3,52 @@
   border-radius: 5px;
   font-size: 14px;
   padding: 10px 80px;
-  // width: 80%;
   margin: 4px 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   > div {
-    > span {
-      display: flex;
-    }
-  }
-  > div:first-of-type {
-    width: 48px;
-    height: 60px;
-    margin-right: 20px;
-    position: relative;
-    > img {
-      object-fit: contain;
-      position: relative;
-      height: auto;
+    display: flex;
+    align-items: center;
+    > div {
+      p {
+        max-width: 500px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      > span {
+        font-size: 13px;
+      }
     }
   }
   strong {
     font-size: 15px;
+  }
+}
+.buttonWrapper {
+  button {
+    padding: 4px 8px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #a3a3a3;
+    margin-left: 5px;
+  }
+  button:hover {
+    background: #fafafa;
+    border: 1px solid #525252;
+    color: #525252;
+  }
+}
+.thumbnail {
+  width: 48px;
+  height: 60px;
+  margin-right: 20px;
+  position: relative;
+  > img {
+    object-fit: contain;
+    position: relative;
+    height: auto;
   }
 }
