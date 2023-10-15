@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styles from "./header.module.scss";
+import { signIn } from "next-auth/react";
+import Navigation from "../Navigation";
 
 const Header = () => {
   return (
@@ -15,11 +17,8 @@ const Header = () => {
           <li>
             <Link href="/bookreport">독서기록</Link>
           </li>
-          {/* <li>
-            <Link href="/">마이페이지</Link>
-          </li> */}
+          <Navigation />
         </ul>
-        <button>로그인</button>
       </nav>
     </header>
   );

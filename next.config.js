@@ -22,6 +22,12 @@ const nextConfig = {
         port: "",
         pathname: "/product/**",
       },
+      {
+        protocol: "https",
+        hostname: "shopping-phinf.pstatic.net",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   sassOptions: {

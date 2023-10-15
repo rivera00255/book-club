@@ -1,8 +1,7 @@
-import Header from "@/components/Header";
 import "./globals.css";
 import "./common.css";
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import MultipleLayout from "@/components/MultipleLayout";
 
 export const metadata: Metadata = {
   title: "Book Club",
@@ -17,9 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <MultipleLayout>{children}</MultipleLayout>
       </body>
     </html>
   );

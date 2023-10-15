@@ -8,10 +8,10 @@ const ReportEditor = dynamic(() => import("@/components/Editor"), {
 
 const WriteReport = () => {
   return (
-    <div>
-      write report
+    <main>
+      <h2>독서 기록</h2>
       <ReportEditor />
-    </div>
+    </main>
   );
 };
 
