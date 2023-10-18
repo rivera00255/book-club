@@ -8,22 +8,12 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Book {
-  id             Int       @id @default(autoincrement())
-  title          String
-  author         String
-  published      String?
-  report         Report?
-}
-
 model Report {
   id          Int         @id @default(autoincrement())
   title       String
   content     String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  book        Book        @relation(fields: [bookId], references: [id])
-  bookId      Int         @unique
   author      User        @relation(fields: [authorId], references: [email])
   authorId    String
 }

@@ -1,0 +1,31 @@
+.modal {
+  width: 480px;
+  height: 240px;
+  border-radius: 5px;
+  background: #fafafa;
+  box-shadow: 3px 3px 5px #e5e5e5;
+  padding: 40px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > h4 {
+      font-weight: 600;
+    }
+    > input {
+      border: 1px solid #e5e5e5;
+      padding: 5px;
+      border-radius: 5px;
+      margin: 20px 0;
+      width: 90%;
+    }
+    > button {
+      background: #e5e5e5;
+      padding: 4px 32px;
+      border-radius: 5px;
+    }
+    > button:hover {
+      background: #d4d4d4;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
 export const authOptions = {
+  secret: process.env.AUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -40,7 +41,7 @@ export const authOptions = {
         if (!matchesPassword)
           throw new Error("정확한 비밀번호를 입력해주세요.");
 
-        return { id: user.email };
+        return { id: user.email, email: user.email };
       },
     }),
   ],

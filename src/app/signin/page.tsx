@@ -62,11 +62,10 @@ const Signin = () => {
       email,
       password,
       callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`,
-      // redirect: false,
+      redirect: false,
     });
     if (response) {
-      const { error } = response;
-      if (error) alert(error);
+      response.status === 200 ? router.replace("/") : alert(response.error);
     }
   };
 

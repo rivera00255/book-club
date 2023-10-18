@@ -1,0 +1,46 @@
+.articles {
+  padding: 20px 40px;
+  position: relative;
+  > article {
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 32px;
+    > h3 {
+      font-weight: 600;
+    }
+    > div {
+      background: #f5f5f5;
+      border-radius: 5px;
+      min-height: 80px;
+      padding: 32px;
+      margin: 10px 0;
+    }
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > button {
+      background: #525252;
+      border-radius: 5px;
+      padding: 5px 20px;
+      color: #fff;
+      margin: 20px 0;
+    }
+    > button:hover {
+      background: #737373;
+    }
+  }
+  > button {
+    color: #525252;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+  }
+  > button:hover {
+    text-decoration: none;
+  }
+}

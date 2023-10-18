@@ -30,3 +30,12 @@ export type Lib = {
   closed: string;
   operatingTime: string;
 };
+
+export type BookReport = {
+  id?: number;
+  title: string;
+  content: string;
+  createdAt: Date;
+  updatedAt?: Date;
+  authorId: string;
+};

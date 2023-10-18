@@ -1,0 +1,15 @@
+.reports {
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 16px 32px;
+  margin: 5px 0;
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.reports:hover {
+  border: 1px solid #d4d4d4;
+}
