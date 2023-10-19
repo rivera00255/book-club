@@ -5,6 +5,8 @@ import styles from "./editor.module.scss";
 import { mutateFetch } from "@/utilities/fetcher";
 import { useRouter } from "next/navigation";
 import { BookReport } from "@/app/type";
+import { useDispatch } from "react-redux";
+import { create } from "@/store/slices/notifySlice";
 
 type User = {
   name?: string | null | undefined;
@@ -23,6 +25,7 @@ const ReportEditor = ({
   const reportRef = useRef<Editor>(null);
   const router = useRouter();
   const id = report?.id ?? 0;
+  const dispatch = useDispatch();
 
   const onUploadImage = async (blob: Blob, callback: Function) => {
     const response = await fetch(`/api/file/upload?filename=${blob.name}`, {
@@ -46,6 +49,7 @@ const ReportEditor = ({
       report
     );
     if (response) {
+      dispatch(create({ message: "수정 완료되었습니다." }));
       router.refresh();
       router.replace(`../${report.id}`);
     }
@@ -71,7 +75,10 @@ const ReportEditor = ({
     const response = await mutateFetch("DELETE", `/api/report/${report.id}`, {
       authorId: user?.email,
     });
-    if (response) router.replace("../");
+    if (response.status === 200) {
+      dispatch(create({ message: "글이 삭제되었습니다." }));
+      router.replace("../");
+    }
   };
 
   const onSubmit = () => {
@@ -91,7 +98,7 @@ const ReportEditor = ({
               content: content.getHTML(),
             });
       } else {
-        alert("제목과 내용을 입력하세요.");
+        dispatch(create({ message: "제목과 내용을 입력하세요." }));
       }
     }
   };
@@ -125,16 +132,20 @@ const ReportEditor = ({
             }}
           />
         </div>
-        <button onClick={onSubmit}>{!report ? "작성하기" : "수정하기"}</button>
-        {report && (
-          <button
-            onClick={() => {
-              if (confirm("정말 삭제하시겠습니까?")) deleteReport(report);
-            }}
-          >
-            삭제
+        <div className={styles.buttonWrapper}>
+          <button onClick={onSubmit}>
+            {!report ? "작성하기" : "수정하기"}
           </button>
-        )}
+          {report && (
+            <button
+              onClick={() => {
+                if (confirm("정말 삭제하시겠습니까?")) deleteReport(report);
+              }}
+            >
+              삭제
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

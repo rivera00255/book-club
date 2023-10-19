@@ -1,11 +1,13 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
 const usePagination = ({
+  limit,
   currentPage,
   setCurrentPage,
   pageLimit,
   totalPage,
 }: {
+  limit: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
   pageLimit: number;

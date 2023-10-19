@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { BookReport } from "../type";
 import ReportPreview from "@/components/ReportPreview";
 import Pagination from "@/components/Pagination";
+import LoadingIcon from "../../../public/images/loading-2s-200px.gif";
+import Image from "next/image";
 
 const BookReport = () => {
   let limit = 10;
@@ -78,11 +80,22 @@ const BookReport = () => {
     <main>
       <h2>독서 기록</h2>
       <div className={styles.container}>
-        {loading && <div>loading...</div>}
+        {loading && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image src={LoadingIcon} alt="loading" width={100} height={100} />
+          </div>
+        )}
         {reports.length > 0 &&
           reports.map((item) => <ReportPreview item={item} key={item.id} />)}
         {totalCount > 1 && (
           <Pagination
+            limit={limit}
             pageLimit={pageLimit}
             totalPage={Math.ceil(totalCount / limit)}
             currentPage={currentPage}

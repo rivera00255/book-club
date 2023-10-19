@@ -21,6 +21,7 @@ const MyPage = () => {
   const [skip, setSkip] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const getReportByUser = async (authorId: string, skip: number) => {
     const response = await mutateFetch(
@@ -28,6 +29,7 @@ const MyPage = () => {
       `/api/report?authorId=${authorId}&take=${limit}&skip=${skip}`
     );
     if (response) {
+      setLoading(false);
       setReports(response.report);
       setTotalCount(response.totalCount);
     }
@@ -58,12 +60,16 @@ const MyPage = () => {
         <article>
           <h3>나의 독서 기록</h3>
           <div>
-            {reports.length > 0 &&
-              reports.map((item) => (
-                <ReportPreview item={item} key={item.id} />
-              ))}
+            {loading ? (
+              <div style={{ color: "#a3a3a3" }}>Loading...</div>
+            ) : reports.length > 0 ? (
+              reports.map((item) => <ReportPreview item={item} key={item.id} />)
+            ) : (
+              <div style={{ color: "#a3a3a3" }}>독서 기록이 없습니다.</div>
+            )}
             {totalCount > 1 && (
               <Pagination
+                limit={limit}
                 pageLimit={pageLimit}
                 totalPage={Math.ceil(totalCount / limit)}
                 currentPage={currentPage}

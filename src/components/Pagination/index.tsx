@@ -3,11 +3,13 @@ import usePagination from "../../hooks/usePagination";
 import { Dispatch, SetStateAction } from "react";
 
 const Pagination = ({
+  limit,
   pageLimit,
   totalPage,
   currentPage,
   setCurrentPage,
 }: {
+  limit: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
   pageLimit: number;
@@ -23,6 +25,7 @@ const Pagination = ({
     moveToFirst,
     moveToLast,
   } = usePagination({
+    limit,
     pageLimit,
     totalPage,
     currentPage,

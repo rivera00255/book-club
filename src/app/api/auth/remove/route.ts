@@ -27,7 +27,7 @@ export const DELETE = async (request: Request) => {
       },
     });
 
-    return new NextResponse(email, { status: 200 });
+    return new NextResponse(null, { status: 200 });
   } catch (error: any) {
     return new NextResponse(error.message, {
       status: 500,

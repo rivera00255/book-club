@@ -4,6 +4,8 @@ import styles from "./signin.module.scss";
 import { useRef, useState } from "react";
 import { mutateFetch } from "@/utilities/fetcher";
 import { signIn } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { create } from "@/store/slices/notifySlice";
 
 const Signin = () => {
   const router = useRouter();
@@ -14,6 +16,7 @@ const Signin = () => {
     email: "",
     pw: "",
   });
+  const dispatch = useDispatch();
 
   const validateEmail = (value: string) => {
     if (value !== "") {
@@ -47,11 +50,13 @@ const Signin = () => {
     if (response) {
       const { user, message } = response;
       if (message) {
-        alert(message);
+        if (typeof window !== "undefined") alert(message);
         return;
       }
       if (user) {
-        alert("가입이 완료되었습니다. 로그인 후 이용해주세요.");
+        dispatch(
+          create({ message: "가입이 완료되었습니다. 로그인 후 이용해주세요." })
+        );
         setIsSignin(true);
       }
     }
@@ -65,7 +70,12 @@ const Signin = () => {
       redirect: false,
     });
     if (response) {
-      response.status === 200 ? router.replace("/") : alert(response.error);
+      if (response.status === 200) {
+        dispatch(create({ message: "로그인되었습니다." }));
+        router.replace("/");
+      } else {
+        if (typeof window !== "undefined") alert(response.error);
+      }
     }
   };
 

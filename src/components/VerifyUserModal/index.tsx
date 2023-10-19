@@ -22,10 +22,10 @@ const VerifyUserModal = ({
         email,
         password,
       });
-      if (response) {
-        signOut();
-        router.replace("/");
-      }
+      setIsOpenModal(false);
+      signOut({
+        callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`,
+      });
     }
   };
 

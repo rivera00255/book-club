@@ -1,12 +1,12 @@
 .container {
   > div {
     padding: 20px 40px;
-    > button {
-      background: #e5e5e5;
-      border-radius: 5px;
-      padding: 5px 32px;
-      margin: 10px 0;
-    }
+    // > button {
+    //   background: #e5e5e5;
+    //   border-radius: 5px;
+    //   padding: 5px 32px;
+    //   margin: 10px 0;
+    // }
   }
   input {
     border: 1px solid #e5e5e5;
@@ -19,5 +19,18 @@
     width: 100%;
     margin-bottom: 10px;
     padding: 7px 8px;
+  }
+}
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  > button {
+    background: #e5e5e5;
+    border-radius: 5px;
+    padding: 5px 32px;
+    margin: 10px 0;
+    margin: 0 4px;
   }
 }
