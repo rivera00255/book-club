@@ -3,6 +3,7 @@ import Dimmed from "../Dimmed";
 import styles from "./verify.module.scss";
 import { mutateFetch } from "@/utilities/fetcher";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const VerifyUserModal = ({
   email,
@@ -21,8 +22,10 @@ const VerifyUserModal = ({
         email,
         password,
       });
-      console.log(response);
-      // response && router.replace("/");
+      if (response) {
+        signOut();
+        router.replace("/");
+      }
     }
   };
 

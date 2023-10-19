@@ -24,6 +24,16 @@ const ReportEditor = ({
   const router = useRouter();
   const id = report?.id ?? 0;
 
+  const onUploadImage = async (blob: Blob, callback: Function) => {
+    const response = await fetch(`/api/file/upload?filename=${blob.name}`, {
+      method: "POST",
+      headers: { "content-type": blob.type || "application/octet-stream" },
+      body: blob,
+    });
+    const { url } = await response.json();
+    callback(url, blob.name);
+  };
+
   const createReport = async (report: { [key: string]: any }) => {
     const response = await mutateFetch("POST", "/api/report", report);
     if (response) router.push("../bookreport");
@@ -41,12 +51,26 @@ const ReportEditor = ({
     }
   };
 
-  const deleteReport = async (id: number) => {
+  const deleteImage = async (content: string) => {
+    if (content) {
+      const regex = /(?<=src=")(.*)(?=" alt)/g;
+      const images = content.match(regex);
+      if (!images) return;
+      images.forEach(async (url) => {
+        const response = await fetch(`/api/file/delete?url=${url}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/octet-stream" },
+        });
+      });
+    }
+  };
+
+  const deleteReport = async (report: BookReport) => {
+    deleteImage(report.content);
     const authorId = user?.email;
-    const response = await mutateFetch("DELETE", `/api/report/${id}`, {
+    const response = await mutateFetch("DELETE", `/api/report/${report.id}`, {
       authorId: user?.email,
     });
-    console.log(response);
     if (response) router.replace("../");
   };
 
@@ -96,13 +120,16 @@ const ReportEditor = ({
             useCommandShortcut={true}
             usageStatistics={false}
             ref={reportRef}
+            hooks={{
+              addImageBlobHook: onUploadImage,
+            }}
           />
         </div>
         <button onClick={onSubmit}>{!report ? "작성하기" : "수정하기"}</button>
         {report && (
           <button
             onClick={() => {
-              if (confirm("정말 삭제하시겠습니까?")) deleteReport(id);
+              if (confirm("정말 삭제하시겠습니까?")) deleteReport(report);
             }}
           >
             삭제

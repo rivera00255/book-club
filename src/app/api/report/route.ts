@@ -11,9 +11,13 @@ export const GET = async (request: Request) => {
   // const lastId = Number(cursor);
   const authorId = url.searchParams.get("authorId");
 
-  const count = await prisma.report.count();
-
   if (authorId) {
+    const count = await prisma.report.count({
+      where: {
+        authorId,
+      },
+    });
+
     const report = await prisma.report.findMany({
       where: {
         authorId,
@@ -30,6 +34,8 @@ export const GET = async (request: Request) => {
       totalCount: count,
     });
   }
+
+  const count = await prisma.report.count();
 
   const report = await prisma.report.findMany({
     orderBy: [
