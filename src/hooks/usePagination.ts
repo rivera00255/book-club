@@ -1,10 +1,11 @@
+import { persist } from "@/utilities/persist";
 import { Dispatch, SetStateAction, useState } from "react";
 
 const usePagination = ({
   limit,
+  pageLimit,
   currentPage,
   setCurrentPage,
-  pageLimit,
   totalPage,
 }: {
   limit: number;
@@ -28,20 +29,42 @@ const usePagination = ({
     pageOffset + pageLimit
   );
 
+  const savedPage =
+    typeof window !== "undefined" && persist.getSessionStorage("page");
+
+  const saveCurrentPage = (
+    currentPage: number,
+    currentPageBlock: number,
+    firstCount: number
+  ) => {
+    persist.setSessionStorage("page", {
+      currentPage,
+      currentPageBlock,
+      firstCount,
+    });
+  };
+
   const clickPage = (i: number) => {
     setCurrentPage(i);
+    saveCurrentPage(i, currentPageBlock, (i - 1) * limit);
   };
 
   const prev = () => {
     if (currentPageBlock < 1 || currentPageBlock === 0) return;
     setCurrentPage((currentPageBlock - 1) * pageLimit + 1);
     setCurrentPageBlock((prev) => prev - 1);
+    saveCurrentPage(
+      currentPage - 1,
+      currentPageBlock,
+      (currentPage - 1) * limit - limit
+    );
   };
 
   const next = () => {
     if ((currentPageBlock + 1) * pageLimit >= totalPage) return;
     setCurrentPage((currentPageBlock + 1) * pageLimit + 1);
     setCurrentPageBlock((prev) => prev + 1);
+    saveCurrentPage(currentPage + 1, currentPageBlock, currentPage * limit);
   };
 
   const moveToFirst = () => {

@@ -6,6 +6,10 @@ import { useRouter } from "next/navigation";
 const Navigation = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const callbackUrl =
+    process.env.NODE_ENV === "production"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 
   const isView = status === "loading" ? "0" : "100%";
 
@@ -20,7 +24,7 @@ const Navigation = () => {
             <button
               onClick={() =>
                 signOut({
-                  callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`,
+                  callbackUrl: callbackUrl,
                 })
               }
             >

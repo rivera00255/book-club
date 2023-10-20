@@ -34,7 +34,7 @@ export type Lib = {
 export type BookReport = {
   id?: number;
   title: string;
-  content: string;
+  content: string | null;
   createdAt: Date;
   updatedAt?: Date;
   authorId: string;

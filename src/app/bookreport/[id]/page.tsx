@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import styles from "./report.module.scss";
 import BoardNavigation from "@/components/BoardNavigation";
 
-const Reports = async ({ params }: { params: { id: string } }) => {
+const BookReport = async ({ params }: { params: { id: string } }) => {
   const id = Number(params.id);
 
   const report = await prisma.report.findUnique({
@@ -33,4 +33,4 @@ const Reports = async ({ params }: { params: { id: string } }) => {
     );
 };
 
-export default Reports;
+export default BookReport;

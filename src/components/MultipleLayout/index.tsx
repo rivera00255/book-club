@@ -6,19 +6,24 @@ import AuthProvider from "@/lib/AuthProvider";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import Notifications from "../Notifications";
+import { useEffect } from "react";
 
 const MultipleLayout = ({ children }: { children: React.ReactNode }) => {
-  // const currentFile = __filename;
-  // console.log(currentFile.split(".next/server/app")[1]);
   const segment = useSelectedLayoutSegment();
   const notification = useSelector((state: RootState) => state.notify);
 
+  useEffect(() => {
+    if (!segment?.includes("bookreport")) {
+      sessionStorage.removeItem("page");
+    }
+  }, [segment]);
+
   if (segment === "signin")
     return (
-      <AuthProvider>
+      <>
         {notification.isNotify && <Notifications />}
         {children}
-      </AuthProvider>
+      </>
     );
   return (
     <AuthProvider>

@@ -1,108 +1,19 @@
-"use client";
-import styles from "./bookreport.module.scss";
-import { queryFetch } from "@/utilities/fetcher";
-import { useEffect, useState } from "react";
-import { BookReport } from "../type";
-import ReportPreview from "@/components/ReportPreview";
-import Pagination from "@/components/Pagination";
-import LoadingIcon from "../../../public/images/loading-2s-200px.gif";
-import Image from "next/image";
+import ReportList from "@/components/ReportList";
+import prisma from "@/lib/prisma";
 
-const BookReport = () => {
-  let limit = 10;
-  let pageLimit = 10;
-  // const [cursor, setCursor] = useState(0);
-  const [reports, setReports] = useState<BookReport[]>([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const [skip, setSkip] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-
-  // const handleCursor = (
-  //   currentPage: number,
-  //   totalCount: number,
-  //   limit: number
-  // ) => {
-  //   if (currentPage === 1) {
-  //     setCursor(totalCount);
-  //     return;
-  //   }
-  //   setCursor(totalCount - currentPage + limit - 1);
-  // };
-
-  // const getReports = async (cursor: number) => {
-  //   const response = await queryFetch(
-  //     "GET",
-  //     `/api/report?take=${limit}&cursor=${cursor}`
-  //   );
-  //   if (response) {
-  //     setLoading(false);
-  //     setReports(response.report);
-  //     setTotalCount(response.totalCount);
-  //     return response;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleCursor(currentPage, totalCount, limit);
-  // }, [currentPage]);
-
-  // useEffect(() => {
-  //   getReports(cursor);
-  // }, [cursor]);
-
-  const handleSkip = (currentPage: number, limit: number) => {
-    setSkip((currentPage - 1) * limit);
-  };
-
-  const getReports = async (skip: number) => {
-    const response = await queryFetch(
-      "GET",
-      `/api/report?take=${limit}&skip=${skip}`
-    );
-    if (response) {
-      setLoading(false);
-      setReports(response.report);
-      setTotalCount(response.totalCount);
-      return response;
-    }
-  };
-
-  useEffect(() => {
-    handleSkip(currentPage, limit);
-  }, [currentPage]);
-
-  useEffect(() => {
-    getReports(skip);
-  }, [skip]);
+const BookReport = async () => {
+  const reports = await prisma.report.findMany({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+  });
 
   return (
     <main>
       <h2>독서 기록</h2>
-      <div className={styles.container}>
-        {loading && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Image src={LoadingIcon} alt="loading" width={100} height={100} />
-          </div>
-        )}
-        {reports.length > 0 &&
-          reports.map((item) => <ReportPreview item={item} key={item.id} />)}
-        {totalCount > 1 && (
-          <Pagination
-            limit={limit}
-            pageLimit={pageLimit}
-            totalPage={Math.ceil(totalCount / limit)}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        )}
-      </div>
+      {reports && <ReportList reports={reports} />}
     </main>
   );
 };

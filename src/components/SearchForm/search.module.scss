@@ -17,15 +17,6 @@
       background: #cbd5e1;
     }
   }
-  > div {
-    > span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 48px 0;
-      color: #737373;
-    }
-  }
   select,
   input[type="text"] {
     border: 1px solid #737373;
@@ -36,5 +27,15 @@
   }
   input[type="text"] {
     padding: 7px;
+  }
+}
+.list {
+  min-height: 50vh;
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 48px 0;
+    color: #737373;
   }
 }

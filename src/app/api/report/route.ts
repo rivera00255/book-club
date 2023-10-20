@@ -5,10 +5,8 @@ export const dynamic = "force-dynamic";
 
 export const GET = async (request: Request) => {
   const url = new URL(request.url);
-  // const cursor = url.searchParams.get("cursor");
   const take = url.searchParams.get("take");
   const skip = url.searchParams.get("skip");
-  // const lastId = Number(cursor);
   const authorId = url.searchParams.get("authorId");
 
   if (authorId) {
@@ -43,26 +41,12 @@ export const GET = async (request: Request) => {
         createdAt: "desc",
       },
     ],
-    take: Number(take),
-    skip: Number(skip),
+    ...(take && { take: Number(take) }),
+    ...(skip && { skip: Number(skip) }),
+    // take: Number(take),
+    // skip: Number(skip),
   });
 
-  // const report = await prisma.report.findMany({
-  //   orderBy: [
-  //     {
-  //       createdAt: "desc",
-  //     },
-  //   ],
-  //   take: Number(take),
-  //   skip: lastId ? 1 : 0,
-  //   ...(lastId && { cursor: { id: lastId } }),
-  // });
-
-  // return NextResponse.json({
-  //   report: report,
-  //   totalCount: count,
-  //   cursor: report[0].id,
-  // });
   return NextResponse.json({
     report: report,
     totalCount: count,

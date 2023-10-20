@@ -15,6 +15,10 @@ const VerifyUserModal = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const callbackUrl =
+    process.env.NODE_ENV === "production"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 
   const deleteUser = async (password: string) => {
     if (email) {
@@ -24,7 +28,7 @@ const VerifyUserModal = ({
       });
       setIsOpenModal(false);
       signOut({
-        callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`,
+        callbackUrl: callbackUrl,
       });
     }
   };

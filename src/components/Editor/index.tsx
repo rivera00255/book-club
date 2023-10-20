@@ -70,7 +70,7 @@ const ReportEditor = ({
   };
 
   const deleteReport = async (report: BookReport) => {
-    deleteImage(report.content);
+    report.content && deleteImage(report.content);
     const authorId = user?.email;
     const response = await mutateFetch("DELETE", `/api/report/${report.id}`, {
       authorId: user?.email,
@@ -81,7 +81,8 @@ const ReportEditor = ({
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = (authorId: string | null | undefined) => {
+    if (authorId) return;
     if (titleRef.current && reportRef.current) {
       const title = titleRef.current.value;
       const content = reportRef.current?.getInstance();
@@ -90,7 +91,7 @@ const ReportEditor = ({
           ? createReport({
               title: title,
               content: content.getHTML(),
-              authorId: user?.email,
+              authorId: authorId,
             })
           : updateReport({
               ...report,
@@ -133,7 +134,7 @@ const ReportEditor = ({
           />
         </div>
         <div className={styles.buttonWrapper}>
-          <button onClick={onSubmit}>
+          <button onClick={() => onSubmit(user?.email)}>
             {!report ? "작성하기" : "수정하기"}
           </button>
           {report && (

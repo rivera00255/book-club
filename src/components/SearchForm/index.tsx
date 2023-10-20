@@ -13,6 +13,7 @@ const SearchForm = () => {
   const [books, setBooks] = useState<{ [key: string]: Books }[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const searchBooks = async (type: string, search: string, pageNo: number) => {
     const response = await queryFetch(
@@ -20,10 +21,12 @@ const SearchForm = () => {
       `/api/books/search?${type}=${search}&pageNo=${pageNo}`
     );
     setBooks(response.docs);
+    setLoading(false);
     return response;
   };
 
   const onSearch = async () => {
+    setLoading(true);
     setSearch("");
     setTotalCount(0);
     setCurrentPage(1);
@@ -59,21 +62,20 @@ const SearchForm = () => {
         <button onClick={onSearch}>검색</button>
       </div>
       <div>
-        {/* {search !== "" && books.length < 1 && (
-          <span>검색 결과가 없습니다.</span>
-        )} */}
-        {books.length > 0 &&
-          books.map((item: { [key: string]: Books }) => (
-            <BookPreview item={item.doc} key={item.doc.isbn13} />
-          ))}
-        {totalCount > 1 && (
-          <Pagination
-            pageLimit={10}
-            totalPage={Math.ceil(totalCount / 20)}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        )}
+        <div className={styles.list}>
+          {!loading && totalCount < 1 && <span>검색 결과가 없습니다.</span>}
+          {books.length > 0 &&
+            books.map((item: { [key: string]: Books }) => (
+              <BookPreview item={item.doc} key={item.doc.isbn13} />
+            ))}
+        </div>
+        <Pagination
+          limit={20}
+          pageLimit={10}
+          totalPage={Math.ceil(totalCount / 20)}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );
