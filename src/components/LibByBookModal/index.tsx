@@ -1,11 +1,30 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Dimmed from "../Dimmed";
 import styles from "./libModal.module.scss";
-import { regions } from "@/app/api/books/library/route";
 import { queryFetch } from "@/utilities/fetcher";
 import { Lib } from "@/app/type";
 import Pagination from "../Pagination";
 import Link from "next/link";
+
+const regions = [
+  { code: 11, name: "서울" },
+  { code: 21, name: "부산" },
+  { code: 22, name: "대구" },
+  { code: 23, name: "인천" },
+  { code: 24, name: "광주" },
+  { code: 25, name: "대전" },
+  { code: 26, name: "울산" },
+  { code: 29, name: "세종" },
+  { code: 31, name: "경기" },
+  { code: 32, name: "강원" },
+  { code: 33, name: "충북" },
+  { code: 34, name: "충남" },
+  { code: 35, name: "전북" },
+  { code: 36, name: "전남" },
+  { code: 37, name: "경북" },
+  { code: 38, name: "경남" },
+  { code: 39, name: "제주" },
+];
 
 const LibByBookModal = ({
   isbn,
@@ -90,6 +109,7 @@ const LibByBookModal = ({
           )}
           {totalCount > 1 && (
             <Pagination
+              limit={10}
               pageLimit={10}
               totalPage={Math.ceil(totalCount / 10)}
               currentPage={currentPage}
