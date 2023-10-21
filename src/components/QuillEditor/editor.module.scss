@@ -1,12 +1,6 @@
 .container {
   > div {
     padding: 20px 40px;
-    // > button {
-    //   background: #e5e5e5;
-    //   border-radius: 5px;
-    //   padding: 5px 32px;
-    //   margin: 10px 0;
-    // }
   }
   input {
     border: 1px solid #e5e5e5;
@@ -19,6 +13,13 @@
     width: 100%;
     margin-bottom: 10px;
     padding: 7px 8px;
+  }
+  > div {
+    // border: 1px solid #e5e5e5;
+    // border-radius: 5px;
+    // padding: 20px;
+    // min-height: 420px;
+    margin-bottom: 70px;
   }
 }
 .buttonWrapper {

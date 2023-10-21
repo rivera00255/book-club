@@ -6,7 +6,11 @@ import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const ReportEditor = dynamic(() => import("@/components/Editor"), {
+// const WysiwygEditor = dynamic(() => import("@/components/WysiwygEditor"), {
+//   loading: () => <div>loading...</div>,
+//   ssr: false,
+// });
+const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
   loading: () => <div>loading...</div>,
   ssr: false,
 });
@@ -30,7 +34,7 @@ const EditReport = () => {
   return (
     <main>
       <h2>독서 기록</h2>
-      {report && <ReportEditor user={user} report={report} />}
+      {report && <QuillEditor user={user} report={report} />}
     </main>
   );
 };
