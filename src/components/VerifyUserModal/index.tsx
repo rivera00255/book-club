@@ -16,7 +16,7 @@ const VerifyUserModal = ({
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const callbackUrl =
-    process.env.NODE_ENV === "production"
+    typeof window !== "undefined" && process.env.NODE_ENV === "production"
       ? window.location.origin
       : process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 

@@ -1,5 +1,5 @@
 import ReportList from "@/components/ReportList";
-import prisma from "@/lib/prisma";
+import prisma from "../../../prisma";
 
 const BookReport = async () => {
   const reports = await prisma.report.findMany({

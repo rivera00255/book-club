@@ -1,8 +1,8 @@
-import prisma from "@/lib/prisma";
 import styles from "./report.module.scss";
 import BoardNavigation from "@/components/BoardNavigation";
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
+import prisma from "../../../../prisma";
 
 const BookReport = async ({ params }: { params: { id: string } }) => {
   const id = Number(params.id);
@@ -20,11 +20,6 @@ const BookReport = async ({ params }: { params: { id: string } }) => {
           <h4>{report.title}</h4>
           <hr />
           <div>
-            {/* <div
-              dangerouslySetInnerHTML={{
-                __html: report.content ?? "",
-              }}
-            /> */}
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify(new JSDOM("<!DOCTYPE html>").window).sanitize(
