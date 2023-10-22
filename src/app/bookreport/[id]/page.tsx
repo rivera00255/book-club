@@ -1,8 +1,8 @@
 import styles from "./report.module.scss";
 import BoardNavigation from "@/components/BoardNavigation";
+import prisma from "@/lib/prisma";
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
-import prisma from "../../../../prisma";
 
 const BookReport = async ({ params }: { params: { id: string } }) => {
   const id = Number(params.id);
