@@ -6,10 +6,6 @@ import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// const WysiwygEditor = dynamic(() => import("@/components/WysiwygEditor"), {
-//   loading: () => <div>loading...</div>,
-//   ssr: false,
-// });
 const QuillEditor = dynamic(() => import("@/components/QuillEditor"), {
   loading: () => <div>loading...</div>,
   ssr: false,

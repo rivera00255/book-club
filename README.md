@@ -36,4 +36,4 @@ npm run dev
 
 ### 💚 3. 사용한 프레임워크 및 라이브러리
 
-Next, Typscript, Sass, Prisma, Toast UI Editor, Next Auth, Redux Toolkit, Vercel Blob
+Next, Typscript, Sass, Prisma, React Quill, Next Auth, Redux Toolkit, Vercel Blob
