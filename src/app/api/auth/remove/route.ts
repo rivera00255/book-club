@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import prisma from "@/lib/prisma";
 
 export const DELETE = async (request: Request) => {
   try {
@@ -9,23 +8,23 @@ export const DELETE = async (request: Request) => {
       password: string;
     };
 
-    const user = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
+    // const user = await prisma.user.findUnique({
+    //   where: {
+    //     email: email,
+    //   },
+    // });
 
-    if (!user) throw new Error("Not Found");
+    // if (!user) throw new Error("Not Found");
 
-    const verifyPassoword = await bcrypt.compare(password, user.password);
+    // const verifyPassoword = await bcrypt.compare(password, user.password);
 
-    if (!verifyPassoword) new NextResponse("Not Found", { status: 401 });
+    // if (!verifyPassoword) new NextResponse("Not Found", { status: 401 });
 
-    await prisma.user.delete({
-      where: {
-        email: email,
-      },
-    });
+    // await prisma.user.delete({
+    //   where: {
+    //     email: email,
+    //   },
+    // });
 
     return new NextResponse(null, { status: 200 });
   } catch (error: any) {

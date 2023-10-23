@@ -1,7 +1,7 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 
 const authOptions = {
   secret: process.env.AUTH_SECRET,
@@ -25,23 +25,24 @@ const authOptions = {
 
         const { email, password } = credentials;
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: email,
-          },
-        });
+        // const user = await prisma.user.findUnique({
+        //   where: {
+        //     email: email,
+        //   },
+        // });
 
-        if (!user)
-          throw new Error(
-            "가입 내역이 없습니다. 회원가입 후 로그인해해주세요."
-          );
+        // if (!user)
+        //   throw new Error(
+        //     "가입 내역이 없습니다. 회원가입 후 로그인해해주세요."
+        //   );
 
-        const matchesPassword = await bcrypt.compare(password, user.password);
+        // const matchesPassword = await bcrypt.compare(password, user.password);
 
-        if (!matchesPassword)
-          throw new Error("정확한 비밀번호를 입력해주세요.");
+        // if (!matchesPassword)
+        //   throw new Error("정확한 비밀번호를 입력해주세요.");
 
-        return { id: user.email, email: user.email };
+        return { id: "", email: "" };
+        // return { id: user.email, email: user.email };
       },
     }),
   ],
