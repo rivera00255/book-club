@@ -1,6 +1,9 @@
 import ReportList from "@/components/ReportList";
 import prisma from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const BookReport = async () => {
   const reports = await prisma.report.findMany({
     orderBy: [
