@@ -122,6 +122,8 @@ button,
 [type="submit"] {
   -webkit-appearance: button;
   background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 :-moz-focusring {
   outline: auto;

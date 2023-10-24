@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.4.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@vercel/blob": "^0.14.0",
     "@vercel/postgres": "^0.5.0",
@@ -31,6 +32,7 @@
     "eslint-config-next": "13.5.4",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.3",
+    "prisma": "^5.4.2",
     "sass": "^1.69.0",
     "ts-node": "^10.9.1",
     "typescript": "^5"
