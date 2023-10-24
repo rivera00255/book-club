@@ -34,4 +34,11 @@
     border: 1px solid #d4d4d4;
     padding: 4px 0 4px 8px;
   }
+  @media (max-width: 480px) {
+    table {
+      td:not(:nth-of-type(1)) {
+        display: none;
+      }
+    }
+  }
 }

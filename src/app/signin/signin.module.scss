@@ -1,6 +1,9 @@
 .container {
   width: 480px;
   margin: 0 auto;
+  @media (max-width: 480px) {
+    width: 96%;
+  }
   > h2 {
     margin-left: 0;
     margin-bottom: 0;
@@ -12,6 +15,10 @@
   border-radius: 5px;
   padding: 48px 40px;
   margin-top: 20px;
+  @media (max-width: 480px) {
+    padding: 48px 20px;
+    font-size: 14px;
+  }
   > label {
     display: flex;
     align-items: center;

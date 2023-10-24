@@ -95,7 +95,11 @@ const LibByBookModal = ({
               <tbody>
                 {librarys.map((item) => (
                   <tr key={item.lib.libCode}>
-                    <td>{item.lib.libName}</td>
+                    <td>
+                      <Link href={item.lib.homepage} target="_blank">
+                        {item.lib.libName}
+                      </Link>
+                    </td>
                     <td>{item.lib.address}</td>
                     <td>
                       <Link href={item.lib.homepage} target="_blank">

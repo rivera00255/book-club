@@ -21,6 +21,7 @@ const BookReport = async ({ params }: { params: { id: string } }) => {
           <hr />
           <div>
             <div
+              style={{ marginBottom: "40px" }}
               dangerouslySetInnerHTML={{
                 __html: DOMPurify(new JSDOM("<!DOCTYPE html>").window).sanitize(
                   report.content ?? ""
