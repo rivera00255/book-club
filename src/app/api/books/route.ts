@@ -2,8 +2,8 @@ import { queryFetch } from "@/utilities/fetcher";
 import { NextResponse } from "next/server";
 
 export const GET = async (request: Request) => {
-  const apiUrl = process.env.LIBRARY_URL;
-  const authKey = process.env.LIBRARY_AUTH_KEY;
+  const apiUrl = process.env.NEXT_PUBLIC_LIBRARY_URL;
+  const authKey = process.env.NEXT_PUBLIC_LIBRARY_AUTH_KEY;
   const { searchParams } = new URL(request.url);
   const isbn = searchParams.get("isbn");
 
