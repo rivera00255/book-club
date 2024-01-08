@@ -9,8 +9,7 @@ export default async function Home() {
     "GET",
     `${process.env.NEXT_PUBLIC_LIBRARY_URL}/loanItemSrch?authKey=${
       process.env.NEXT_PUBLIC_LIBRARY_AUTH_KEY
-    }${handlePeriod()}&pageNo=1&pageSize=30&format=json`,
-    "no-store"
+    }${handlePeriod()}&pageNo=1&pageSize=30&format=json`
   );
 
   return (
