@@ -4,9 +4,6 @@ import Image from "next/image";
 import sytles from "./main.module.scss";
 import { handlePeriod } from "@/utilities/calculate";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 export default async function Home() {
   const books = await queryFetch(
     "GET",
